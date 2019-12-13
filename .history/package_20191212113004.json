@@ -1,0 +1,67 @@
+interface YourInterfaceName {
+	name:string;
+	displayName:string;
+	description:string;
+	version:string;
+	publisher:string;
+	engines:IEngin;
+	categories:string[];
+	activationEvents:string[];
+	main:string;
+	contributes:IContribut;
+	scripts:IScript;
+	devDependencies:IDevDependenci;
+}
+
+/* 自动生成的 Interface */
+
+interface IDevDependenci {
+	@types/glob:string;
+	@types/mocha:string;
+	@types/node:string;
+	@types/vscode:string;
+	glob:string;
+	mocha:string;
+	typescript:string;
+	tslint:string;
+	vscode-test:string;
+}
+
+interface IScript {
+	vscode:prepublish:string;
+	compile:string;
+	watch:string;
+	pretest:string;
+	test:string;
+}
+
+interface IContribut {
+	commands:ICommand[];
+	keybindings:IKeybinding[];
+	menus:IMenu;
+}
+
+interface IMenu {
+	editor/context:IEditor/context[];
+}
+
+interface IEditor/context {
+	command:string;
+	group:string;
+}
+
+interface IKeybinding {
+	command:string;
+	key:string;
+	mac:string;
+	when:string;
+}
+
+interface ICommand {
+	command:string;
+	title:string;
+}
+
+interface IEngin {
+	vscode:string;
+}
