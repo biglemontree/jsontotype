@@ -1,3 +1,5 @@
+import * as prettier from 'prettier';
+
 /**
  * @description 驼峰转底杠
  * @example variableName => variable_name
@@ -45,3 +47,29 @@ export const deleteQuote = (str:string) => {
   }
   return str;
 };
+
+/**
+ * 
+ * @param value:string 
+ * @description 对象转为格式化后的字符串
+ */
+export function objectToFormatString(value:string) : string {
+  const text = prettier.format(value, {
+    // parser: "json5",
+    bracketSpacing: true,
+    trailingComma: "all",
+  });
+  return text;
+}
+
+/**
+ * 
+ * @param value 
+ * @description 删除JSON.stringify后的转义字符
+ */
+export function deleteEscapeSymbol(value:string) {
+  return JSON.stringify(value)
+    .replace(/\\f|\\n|\\r|\\t|\\v|\\/g, '')
+    .replace(/\"{/g, '{')
+    .replace(/\}\"/g, '}');
+}

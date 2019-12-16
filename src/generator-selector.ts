@@ -6,11 +6,11 @@ export function GenSelector (data:string) {
   try {
     const obj = JSON.parse(data);
     const type = typeof obj;
-    if (type === 'object') {
-      if (Array.isArray(obj)) {
-        return generateArraySelector(obj);
-      }
-    }
+    // if (type === 'object') {
+    //   if (Array.isArray(obj)) {
+    //     return generateArraySelector(obj);
+    //   }
+    // }
 
     var result = generateSelector(obj, '');
     return (result + '\n/* 自动生成的 Selector Function */\n' + extra_interface).trim();

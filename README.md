@@ -2,12 +2,14 @@
 
 an vscode extension to transform Json Object → TypeScript Interface easily!
 
-## Use:sparkles:
+## How To Use:sparkles:
 > Select your string and use the following commands.
 
 Function | Example | Command | Keybindings
 -|-|-|-
-json转TypeScript Interface | `{"title": "test my jsontotype"}` => `interface YourNameInterface { title:string }` | jsontotype.totype | `ctrl+shift+1`
+json转TypeScript Interface | `{"title": "test my jsontotype"}` => `interface YourNameInterface { title:string }` | jsontotype.totype | ctrl+shift+`
+json转TypeScript Selector Function | `{"title": "test my jsontotype"}` => `interface YourNameInterface { title:string }` | jsontotype.totype | ctrl+shift+`
+
 
 
 ## Installation:package:

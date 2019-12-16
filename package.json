@@ -2,8 +2,11 @@
 	"name": "jsontotype",
 	"displayName": "jsonToType",
 	"description": "easy to transform json to typescript type",
-	"version": "0.0.1",
+	"version": "0.0.5",
 	"publisher": "tywin",
+	"repository": {
+		"url": "https://github.com/biglemontree/jsontotype.git"
+	},
 	"engines": {
 		"vscode": "^1.40.0"
 	},
@@ -13,35 +16,45 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:jsontotype.toselector",
-		"onCommand:jsontotype.totype"
+		"onCommand:jsonToType.toSelector",
+		"onCommand:jsonToType.toType"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "jsontotype.toselector",
+				"command": "jsonToType.toSelector",
 				"title": "selected json → selector function"
 			},
 			{
-				"command": "jsontotype.totype",
+				"command": "jsonToType.toType",
 				"title": "selected json → TypeScript Interface",
-				"category": "jsontotype.totype"
+				"category": "jsonToType.toType"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "jsontotype.totype",
-				"key": "ctrl+shift+1",
-				"mac": "ctrl+shift+1",
+				"command": "jsonToType.toType",
+				"key": "ctrl+shift+`",
+				"mac": "ctrl+shift+`",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "jsonToType.toType",
+				"key": "ctrl+shift+i",
+				"mac": "ctrl+shift+i",
 				"when": "editorTextFocus"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
-					"command": "jsontotype.totype",
+					"command": "jsonToType.toType",
 					"group": "5_cutcopypaste"
+				},
+				{
+					"command": "jsonToType.toSelector",
+					"group": "6_cutcopypaste"
 				}
 			]
 		}
@@ -65,6 +78,8 @@
 		"vscode-test": "^1.2.2"
 	},
 	"dependencies": {
+		"lodash": "^4.17.15",
+		"prettier": "^1.19.1",
 		"quicktype-core": "^6.0.52",
 		"quicktype-typescript-input": "0.0.11"
 	}
