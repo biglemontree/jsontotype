@@ -2,7 +2,7 @@
 	"name": "jsontotype",
 	"displayName": "jsonToType",
 	"description": "easy to transform json to typescript type",
-	"version": "0.0.5",
+	"version": "0.0.7",
 	"publisher": "tywin",
 	"repository": {
 		"url": "https://github.com/biglemontree/jsontotype.git"
@@ -17,7 +17,12 @@
 	],
 	"activationEvents": [
 		"onCommand:jsonToType.toSelector",
-		"onCommand:jsonToType.toType"
+    "onCommand:jsonToType.toType",
+    "onCommand:varnameChanger.toBottomLine",
+		"onCommand:varnameChanger.toHump",
+		"onCommand:varnameChanger.jsonToBottomLine",
+		"onCommand:varnameChanger.jsonToHump",
+		"onCommand:varnameChanger.deleteQuote"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -30,11 +35,36 @@
 				"command": "jsonToType.toType",
 				"title": "selected json → TypeScript Interface",
 				"category": "jsonToType.toType"
+      },
+      {
+				"command": "varnameChanger.toHump",
+				"title": "底杠转驼峰",
+				"category": "varnameChanger.toHump"
+			},
+			{
+				"command": "varnameChanger.toBottomLine",
+				"title": "驼峰转底杠",
+				"category": "varnameChanger.toBottomLine"
+			},
+			{
+				"command": "varnameChanger.jsonToHump",
+				"title": "JSON底杠转驼峰",
+				"category": "varnameChanger.jsonToHump"
+			},
+			{
+				"command": "varnameChanger.jsonToBottomLine",
+				"title": "JSON驼峰转底杠",
+				"category": "varnameChanger.jsonToBottomLine"
+			},
+			{
+				"command": "varnameChanger.deleteQuote",
+				"title": "删除引号",
+				"category": "varnameChanger.deleteQuote"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "jsonToType.toType",
+				"command": "jsonToType.toSelector",
 				"key": "ctrl+shift+`",
 				"mac": "ctrl+shift+`",
 				"when": "editorTextFocus"
@@ -44,17 +74,67 @@
 				"key": "ctrl+shift+i",
 				"mac": "ctrl+shift+i",
 				"when": "editorTextFocus"
+      },
+      {
+				"command": "varnameChanger.toHump",
+				"key": "ctrl+shift+1",
+				"mac": "ctrl+shift+1",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "varnameChanger.toBottomLine",
+				"key": "ctrl+shift+2",
+				"mac": "ctrl+shift+2",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "varnameChanger.jsonToHump",
+				"key": "ctrl+shift+3",
+				"mac": "ctrl+shift+3",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "varnameChanger.jsonToBottomLine",
+				"key": "ctrl+shift+4",
+				"mac": "ctrl+shift+4",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "varnameChanger.deleteQuote",
+				"key": "ctrl+shift+'",
+				"mac": "ctrl+shift+'",
+				"when": "editorTextFocus"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
 					"command": "jsonToType.toType",
-					"group": "5_cutcopypaste"
+					"group": "5_cutcopypaste@1"
 				},
 				{
 					"command": "jsonToType.toSelector",
-					"group": "6_cutcopypaste"
+					"group": "5_cutcopypaste@1"
+        },
+        {
+					"command": "varnameChanger.toHump",
+					"group": "5_cutcopypaste@1"
+				},
+				{
+					"command": "varnameChanger.toBottomLine",
+					"group": "5_cutcopypaste@1"
+				},
+				{
+					"command": "varnameChanger.jsonToHump",
+					"group": "5_cutcopypaste@1"
+				},
+				{
+					"command": "varnameChanger.jsonToBottomLine",
+					"group": "5_cutcopypaste@1"
+				},
+				{
+					"command": "varnameChanger.deleteQuote",
+					"group": "5_cutcopypaste@2"
 				}
 			]
 		}

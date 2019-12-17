@@ -1,0 +1,39 @@
+[
+  {
+    "package_id": 16,
+    "term_id": 1030,
+    "class_id": 1173,
+    "teacher_id": 2,
+    "course_id": 59,
+    "course_name": "顺风顺水的发生时感受到根深蒂固",
+    "unlock_time": 1569405600,
+    "courses": [
+      {
+        "id": 2391714,
+        "type": "NORMAL",
+        "n_purchase": 160,
+        "n_attend_class": 37,
+        "n_attend_class_rate": 0.2313,
+        "n_finish_class": 84,
+        "n_finish_class_rate": 0.525,
+        "n_submit_work": 74,
+        "n_submit_work_rate": 0.4625,
+        "n_upload_video": 0,
+        "n_upload_video_rate": 0.0
+      },
+      {
+        "id": 0,
+        "type": "AVG",
+        "n_purchase": 166,
+        "n_attend_class": 34,
+        "n_attend_class_rate": 0.2048,
+        "n_finish_class": 84,
+        "n_finish_class_rate": 0.506,
+        "n_submit_work": 71,
+        "n_submit_work_rate": 0.4277,
+        "n_upload_video": 0,
+        "n_upload_video_rate": 0.0
+      }
+    ]
+  }
+]

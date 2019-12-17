@@ -1,12 +1,17 @@
 
 import * as vscode from 'vscode';
-
+import * as _ from 'lodash';
 var interfaceNames = ['YourInterfaceName'];
 var extra_interface = '';
 export function toInterface (variable) {
   try {
     const data = JSON.parse(variable);
-    var result = generateInterface('YourInterfaceName', data, '');
+    let result;
+    if (_.isArray(data)) {
+      result = generateInterface('YourInterfaceName', data[0], '');
+    } else {
+      result = generateInterface('YourInterfaceName', data, '');
+    }
     return (result + '\n/* 自动生成的 Interface */\n' + extra_interface).trim();
   } catch (error) {
     vscode.window.showErrorMessage('json 解析错误！');
@@ -36,16 +41,16 @@ function getVariableType (variable, name) {
     //   name = name.slice(0, -1);
     // }
     if (variable.constructor.name == 'Array') {
-      const tpl = [];
-      variable.map((item, index) => {
-        const arrType = getVariableType(item, name);
-        tpl.push(arrType);
-      })
-      const isAllSame = tpl.find(item => item !== tpl[0]);
-      if (isAllSame) {
-        return getVariableType(variable[0], name) + '[]';
-      }
-      return JSON.stringify(tpl);
+      // const tpl = [];
+      // variable.map((item, index) => {
+      //   const arrType = getVariableType(item, name);
+      //   tpl.push(arrType);
+      // })
+      // const isNotSame = tpl.find(item => item !== tpl[0]);
+      // if (isNotSame) {
+      //   return tpl;
+      // }
+      return getVariableType(variable[0], name) + '[]';
     }
 
     if (name) {
@@ -53,7 +58,7 @@ function getVariableType (variable, name) {
     } else {
       name = 'Unknown';
     }
-    var ifName = 'I' + name;
+    var ifName = 'I' + '_' + name;
 
     if (interfaceNames.indexOf(ifName) != -1) {
       var i = 1;

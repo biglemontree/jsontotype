@@ -59,7 +59,7 @@ export function objectToFormatString(value:string) : string {
     bracketSpacing: true,
     trailingComma: "all",
   });
-  return text;
+  return text.replace(/\"/g,'');
 }
 
 /**

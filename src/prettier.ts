@@ -1,75 +1,62 @@
-import * as prettier from 'prettier';
 import * as _ from 'lodash';
-import * as vscode from 'vscode';
-import { toHump, objectToFormatString } from './utils';
-var extra_interface = '';
-
-export function GenPrettierSelector (data:string) {
+import * as prettier from 'prettier';
+import { toHump, logError, message, toBottomLine, fieldReplacer, deleteEscapeSymbol, isJson, logInfo } from './common';
+import { CommonObject } from './type';
+/**
+ * 
+ * @param text 
+ * @description 底杠转驼峰并prettier格式化
+ */
+export function jsonToHump(text:string) {
   try {
-    const obj = JSON.parse(data);
-
-    var result = generateSelector(obj);
-    return (result + '\n/* 自动生成的 Selector Function */\n' + extra_interface).trim();
+    if (!text) {
+      return '';
+    }
+    if (!isJson(text)) {
+      message.warn('选择的文本非正确的JSON！');
+      return text;
+    }
+    const obj = fieldReplacer(JSON.parse(text), toHump);
+    return objectToFormatString(obj);
   } catch (error) {
-    vscode.window.showErrorMessage('json 解析错误！');
+    logError(error);
+    message.error(error);
+    return text;
   }
 }
-
-const template = `
-export function yourSelector(data:Object):Object {
-
-  return {
-    name: data.name,
-    nRate: data.n_rate,
-    deep_obj: {
-      a: data.deep_obj.a,
+/**
+ * 
+ * @param text 
+ * @description 驼峰转底杠并prettier格式化
+ */
+export function jsonToBottomLine(text:string) {
+  try {
+    if (!text) {
+      return '';
     }
-  };
-};
-`;
-function generateSelector(obj:Object):string {
-  const tpl:any = generateRecursiveSelector(obj);
-  let funString = `\nexport function yourSelector (data:Object):Object {\n\treturn `;
-  if (_.isArray(obj)) {
-    
+    if (!isJson(text)) {
+      message.warn('选择的文本非正确的JSON！');
+      return text;
+    }
+    const obj = fieldReplacer(JSON.parse(text), toBottomLine);
+    return obj;
+    // return objectToFormatString(obj);
+  } catch (error) {
+    logError(error);
+    message.error(error);
+    return text;
   }
-  funString += JSON.stringify(tpl);
-  funString += `\t};`;
-  return objectToFormatString(funString);
 }
-
-function genObj(obj:Object) {
-  const tpl:any = {};
-  Object.keys(obj).map(function(key){
-    if (_.isObject(obj[key])) {
-      tpl[toHump(key)] = generateRecursiveSelector(obj[key]);
-    } else {
-      tpl[toHump(key)] = 'data.' + key;
-    }
-  })
-  return tpl;
+/**
+ * 
+ * @param obj 
+ * @description 对象转为格式化后的字符串
+ */
+function objectToFormatString(obj:CommonObject) : string {
+  const text = prettier.format(deleteEscapeSymbol(obj), {
+    parser: "json5",
+    bracketSpacing: true,
+    trailingComma: "all",
+  });
+  return text;
 }
-function generateRecursiveSelector(data:(any[] | {[key:string]:any})):string {
-  if (_.isArray(data)) {
-    return data.map(function(item){
-      if(_.isObject) {
-        return generateRecursiveSelector(item);
-      }
-      return item;
-    })
-  }
-  
-  return genObj(data);
-}
-
-const arrTemplate = `
-export function yourSelector(arr:Array):Array {
-  return arr.map((item) => ({
-    name: obj.name,
-    nRate: obj.n_rate,
-    deep_obj: {
-      a: obj.deep_obj.a,
-    }
-  }));
-};
-`;
