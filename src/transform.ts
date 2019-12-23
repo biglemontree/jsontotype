@@ -12,10 +12,11 @@ export function toInterface (variable) {
     } else {
       result = generateInterface('YourInterfaceName', data, '');
     }
-    console.log(interfaceNames);
     
+    const res = (result + '\n/* 自动生成的 Interface */\n' + extra_interface).trim();
     interfaceNames = ['YourInterfaceName'];
-    return (result + '\n/* 自动生成的 Interface */\n' + extra_interface).trim();
+    extra_interface = '';
+    return res;
   } catch (error) {
     vscode.window.showErrorMessage('json 解析错误！');
   }
@@ -65,7 +66,7 @@ function getVariableType (variable, name) {
     var ifName = 'I'+ name;
 
     if (interfaceNames.indexOf(ifName) != -1) {
-      var i = 1;
+      let i = 1;
       while (interfaceNames.indexOf(ifName + '_' + i) != -1) {
         i++;
       }
