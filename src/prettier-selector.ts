@@ -7,7 +7,6 @@ var extra_interface = '';
 export function GenPrettierSelector (data:string) {
   try {
     const obj = JSON.parse(data);
-
     var result = generateSelector(obj);
     return (result + '\n/* 自动生成的 Selector Function */\n' + extra_interface).trim();
   } catch (error) {
@@ -28,10 +27,9 @@ export function yourSelector(data:Object):Object {
   };
 };
 `;
-// 数组 生成：
+// 数组 生成example：
 const templateArr = `
 export function yourSelector(data:Object):Object {
-
   return data.forEach(item => ({
     name: data.name,
     nRate: data.n_rate,
@@ -47,7 +45,6 @@ function generateSelector(data:(any[] | {[key:string]:any})):string {
   //     funString += 'data.forEach(item => (' + generateRecursiveSelector(item) + '))';
   //     console.log(generateRecursiveSelector(item));
   //   });
-    
   // } else {
   //   funString += JSON.stringify(tpl);
   // }
@@ -79,15 +76,3 @@ function generateRecursiveSelector(data:(any[] | {[key:string]:any})):string {
   
   return genObj(data);
 }
-
-const arrTemplate = `
-export function yourSelector(arr:Array):Array {
-  return arr.map((item) => ({
-    name: obj.name,
-    nRate: obj.n_rate,
-    deep_obj: {
-      a: obj.deep_obj.a,
-    }
-  }));
-};
-`;
